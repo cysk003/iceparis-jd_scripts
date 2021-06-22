@@ -4,8 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
-#女装盲盒 活动时间：2021-05-24到2021-06-22
-#35 1,22 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
+#女装盲盒 活动时间：2021-06-21到2021-06-30
+35 11 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 跳跳乐瓜分京豆
 #15 0,12,22 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 #京东极速版红包(活动时间：2021-5-5至2021-5-31)
