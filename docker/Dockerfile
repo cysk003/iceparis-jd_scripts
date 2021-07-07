@@ -25,7 +25,7 @@ RUN set -ex \
     && git clone -b $REPO_BRANCH $REPO_URL /scripts \
     && cd /scripts \
     && mkdir logs \
-    && npm config set registry https://registry.npm.taobao.org \
+    && npm config set registry https://registry.npmjs.org \
     && npm install \
     && cp /scripts/docker/docker_entrypoint.sh /usr/local/bin \
     && chmod +x /usr/local/bin/docker_entrypoint.sh
