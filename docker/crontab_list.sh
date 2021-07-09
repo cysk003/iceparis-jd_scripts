@@ -19,7 +19,7 @@
 #疯狂欧洲杯(活动时间：2021-06-21至2021-7-12)
 50 10 * * * node /scripts/jd_europeancup.js >> /scripts/logs/jd_europeancup.log 2>&1
 #燃动夏季(活动时间：2021-7-8至2021-8-8)
-25 8-21/3 * * * node /scripts/jd_summer_movement.js >> /scripts/logs/jd_summer_movement.log 2>&1
+25 8-12/1 * * * node /scripts/star_jd_summer_movement.js >> /scripts/logs/star_jd_summer_movement.log 2>&1
 #7月粉丝互动(活动时间：2021-7-1至2021-07-31)
 5 8 * * * node /scripts/jd_wxFans.js >> /scripts/logs/jd_wxFans.log 2>&1
 ##############长期活动##############
