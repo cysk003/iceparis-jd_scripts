@@ -122,8 +122,8 @@ if ($.isNode()) {
   let res = [],res2 = [];
   if(helpAuthorFlag){
     try{
-      res = await getAuthorShareCode('http://cdn.trueorfalse.top/392b03aabdb848d0b7e5ae499ef24e35/');
-      res2 = await getAuthorShareCode(`https://cdn.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/jd_zoo.json?${new Date()}`);
+      res = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/iceparis/dd_scripts/main/shareCodes/jd_zoo.json');
+      res2 = await getAuthorShareCode(`https://cdn.jsdelivr.net/gh/gitupdate/updateTeam@master/shareCodes/jd_zoo.json`);
     }catch (e) {}
     if(!res){res = [];}
     if(!res2){res2 = [];}
