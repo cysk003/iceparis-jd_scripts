@@ -20,9 +20,9 @@ const CryptoJS = require('crypto-js')
 dotenv.config()
 let appId: number = 10028, fingerprint: string | number, token: string, enCryptMethodJD: any;
 let cookie: string = '', cookiesArr: Array<string> = [], res: any = '', shareCodes: string[] = [];
-let CFD_HELP_HW: boolean | string = process.env.CFD_HELP_HW ? process.env.CFD_HELP_HW : true;
+let CFD_HELP_HW: string = process.env.CFD_HELP_HW ? process.env.CFD_HELP_HW : "true";
 console.log('帮助HelloWorld:', CFD_HELP_HW)
-let CFD_HELP_POOL: boolean | string = process.env.CFD_HELP_POOL ? process.env.CFD_HELP_POOL : true;
+let CFD_HELP_POOL: string = process.env.CFD_HELP_POOL ? process.env.CFD_HELP_POOL : "true";
 console.log('帮助助力池:', CFD_HELP_POOL)
 
 
@@ -122,17 +122,12 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
   }
 
   // 获取随机助力码
-  if (CFD_HELP_HW) {
+  if (CFD_HELP_HW === 'true') {
     shareCodes = [
       ...shareCodes,
-      ...[
-        '845605C0CDB46E027B53DBFD505C152CE2FDBBFB74ABBD8CB9FD0FE0ACC43FF8',
-        '84A1A690E9AA8B7267F347E319954401BF810183738AA300E8FCFDEE97F12036',
-        '23CAB59A757E89EF636DFC3C796ADC8E3711507DA704339091672DD623FEF79D',
-      ]
     ]
   }
-  if (CFD_HELP_POOL) {
+  if (CFD_HELP_POOL === 'true') {
     let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20')
     console.log('获取到20个随机助力码:', data.data)
     shareCodes = [...shareCodes, ...data.data]
@@ -145,8 +140,9 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
       console.log('去助力:', shareCodes[j])
       res = await api('story/helpbystage', '_cfd_t,bizCode,dwEnv,ptag,source,strShareId,strZone', {strShareId: shareCodes[j]})
       console.log(res)
-      if (res.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~')
+      if (res.iRet === 2232 || res.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~') {
         break
+      }
       await wait(3000)
     }
   }
@@ -221,10 +217,30 @@ function mainTask(fn: string, stk: string, params: Params = {}) {
 
 function makeShareCodes() {
   return new Promise<void>(async resolve => {
+    let {data} = await axios.post('https://api.m.jd.com/client.action?functionId=initForFarm', `body=${escape(JSON.stringify({"version": 4}))}&appid=wh5&clientVersion=9.1.0`, {
+      headers: {
+        "cookie": cookie,
+        "origin": "https://home.m.jd.com",
+        "referer": "https://home.m.jd.com/myJd/newhome.action",
+        "User-Agent": USER_AGENT,
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
+    let farm: string = data.farmUserPro.shareCode
     res = await api('user/QueryUserInfo', '_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strShareId,strZone', {ddwTaskId: '', strShareId: '', strMarkList: 'undefined'})
     console.log('助力码:', res.strMyShareId)
     shareCodes.push(res.strMyShareId)
-    resolve()
+    axios.get(`https://api.sharecode.ga/api/jxcfd/insert?code=${res.strMyShareId}&farm=${farm}`)
+      .then(res => {
+        if (res.data.code === 200)
+          console.log('已自动提交助力码')
+        else
+          console.log('提交失败！已提交farm的cookie才可提交cfd')
+        resolve()
+      })
+      .catch(e => {
+        console.log(e)
+      })
   })
 }
 
