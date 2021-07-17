@@ -3,8 +3,8 @@
  * 包含雇佣导游，建议每小时1次
  *
  * 此版本暂定默认帮助HelloWorld，帮助助力池
- * export CFD_HELP_HW = true    // 帮助HelloWorld
- * export CFD_HELP_POOL = true  // 帮助助力池
+ * export HELP_HW = true    // 帮助HelloWorld
+ * export HELP_POOL = true  // 帮助助力池
  *
  * 使用jd_env_copy.js同步js环境变量到ts
  * 使用jd_ts_test.ts测试环境变量
@@ -12,40 +12,102 @@
 
 import {format} from 'date-fns';
 import axios from 'axios';
-import USER_AGENT from './TS_USER_AGENTS';
+import USER_AGENT, {TotalBean, getBeanShareCode, getFarmShareCode} from './TS_USER_AGENTS';
 import {Md5} from 'ts-md5'
 import * as dotenv from 'dotenv';
-import {getBeanShareCode, getFarmShareCode} from "./TS_USER_AGENTS";
 
 const CryptoJS = require('crypto-js')
-
+const notify = require('./sendNotify')
 dotenv.config()
 let appId: number = 10028, fingerprint: string | number, token: string = '', enCryptMethodJD: any;
 let cookie: string = '', cookiesArr: string[] = [], res: any = '', shareCodes: string[] = [];
 
-let CFD_HELP_HW: string = process.env.CFD_HELP_HW ? process.env.CFD_HELP_HW : "true";
-console.log('帮助HelloWorld:', CFD_HELP_HW)
-let CFD_HELP_POOL: string = process.env.CFD_HELP_POOL ? process.env.CFD_HELP_POOL : "true";
-console.log('帮助助力池:', CFD_HELP_POOL)
+let HELP_HW: string = process.env.HELP_HW ? process.env.HELP_HW : "true";
+console.log('帮助HelloWorld:', HELP_HW)
+let HELP_POOL: string = process.env.HELP_POOL ? process.env.HELP_POOL : "true";
+console.log('帮助助力池:', HELP_POOL)
 
+interface Params {
+  strBuildIndex?: string,
+  ddwCostCoin?: number,
+  taskId?: number,
+  dwType?: string,
+  configExtra?: string,
+  strStoryId?: string,
+  triggerType?: number,
+  ddwTriggerDay?: number,
+  ddwConsumeCoin?: number,
+  dwIsFree?: number,
+  ddwTaskId?: string,
+  strShareId?: string,
+  strMarkList?: string,
+  dwSceneId?: string,
+  strTypeCnt?: string,
+  dwUserId?: number,
+  ddwCoin?: number,
+  ddwMoney?: number,
+  dwPrizeLv?: number,
+  dwPrizeType?: number,
+  strPrizePool?: string,
+  dwFirst?: number,
+  dwIdentityType?: number,
+  strBussKey?: string,
+  strMyShareId?: string,
+  ddwCount?: number,
+  __t?: number,
+  strBT?: string,
+  dwCurStageEndCnt?: number
+}
 
-let UserName: string, index: number, isLogin: boolean, nickName: string
+let UserName: string, index: number;
 !(async () => {
   await requestAlgo();
   await requireConfig();
-
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)![1])
     index = i + 1;
-    isLogin = true;
-    nickName = '';
+    let {isLogin, nickName}: any = await TotalBean(cookie)
+    if (!isLogin) {
+      notify.sendNotify(__filename.split('/').pop(), `cookie已失效\n京东账号${index}：${nickName || UserName}`)
+      continue
+    }
     console.log(`\n开始【京东账号${index}】${nickName || UserName}\n`);
 
     try {
       await makeShareCodes();
     } catch (e) {
       console.log(e)
+    }
+
+    // 珍珠
+    res = await api('user/ComposeGameState', '', {dwFirst: 1})
+    let strDT: string = res.strDT, strMyShareId: string = res.strMyShareId
+    console.log(`已合成${res.dwCurProgress}个珍珠`)
+    for (let i = 0; i < 8 - res.dwCurProgress; i++) {
+      console.log('继续合成')
+      let RealTmReport: number = getRandomNumberByRange(10, 20)
+      console.log('本次合成需要上报：', RealTmReport)
+      for (let j = 0; j < RealTmReport; j++) {
+        res = await api('user/RealTmReport', '',
+          {dwIdentityType: 0, strBussKey: 'composegame', strMyShareId: strMyShareId, ddwCount: 5})
+        if (res.iRet === 0)
+          console.log(`游戏中途上报${j + 1}：OK`)
+        await wait(5000)
+      }
+      res = await api('user/ComposeGameAddProcess', '__t,strBT,strZone', {__t: Date.now(), strBT: strDT})
+      console.log('游戏完成，已合成', res.dwCurProgress)
+      console.log('游戏完成，等待3s')
+      await wait(3000)
+    }
+    // 珍珠领奖
+    res = await api('user/ComposeGameState', '', {dwFirst: 1})
+    for (let stage of res.stagelist) {
+      if (res.dwCurProgress >= stage.dwCurStageEndCnt && stage.dwIsAward === 0) {
+        let awardRes: any = await api('user/ComposeGameAward', '__t,dwCurStageEndCnt,strZone', {__t: Date.now(), dwCurStageEndCnt: stage.dwCurStageEndCnt})
+        console.log('珍珠领奖：', awardRes.ddwCoin)
+        await wait(3000)
+      }
     }
 
     // 签到 助力奖励
@@ -69,6 +131,28 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
             console.log('签到成功：', res.Data.ddwCoin, res.Data.ddwMoney, res.Data.strPrizePool)
           break
         }
+      }
+    }
+
+    // 船来了
+    res = await api('user/QueryUserInfo', '_cfd_t,bizCode,ddwTaskId,dwEnv,ptag,source,strShareId,strZone', {ddwTaskId: '', strShareId: '', strMarkList: 'undefined'})
+    if (res.StoryInfo.StoryList) {
+      console.log(JSON.stringify(res))
+      if (res.StoryInfo.StoryList[0].Special) {
+        console.log(`船来了，乘客是${res.StoryInfo.StoryList[0].Special.strName}`)
+        let shipRes: any = await api('story/SpecialUserOper', '_cfd_t,bizCode,ddwTriggerDay,dwEnv,dwType,ptag,source,strStoryId,strZone,triggerType', {strStoryId: res.StoryInfo.StoryList[0].strStoryId, dwType: '2', triggerType: 0, ddwTriggerDay: res.StoryInfo.StoryList[0].ddwTriggerDay})
+        console.log(shipRes)
+        console.log('正在下船，等待30s')
+        await wait(30000)
+        shipRes = await api('story/SpecialUserOper', '_cfd_t,bizCode,ddwTriggerDay,dwEnv,dwType,ptag,source,strStoryId,strZone,triggerType', {strStoryId: res.StoryInfo.StoryList[0].strStoryId, dwType: '3', triggerType: 0, ddwTriggerDay: res.StoryInfo.StoryList[0].ddwTriggerDay})
+        if (shipRes.iRet === 0)
+          console.log('船客接待成功')
+        else
+          console.log('船客接待失败', shipRes)
+      }
+
+      if (res.StoryInfo.StoryList[0].Collector) {
+        console.log('收藏家出现')
       }
     }
 
@@ -97,9 +181,8 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
     // 垃圾🚮
     res = await api('story/QueryRubbishInfo', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
     if (res.Data.StoryInfo.StoryList.length !== 0) {
-      console.log('可以倒垃圾')
+      await api('story/RubbishOper', '')
     }
-
 
     // 任务➡️
     let tasks: any
@@ -172,9 +255,9 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
   }
 
   // 获取随机助力码
-  if (CFD_HELP_HW === 'true') {
+  if (HELP_HW === 'true') {
     try {
-      let {data} = await axios.get("https://api.sharecode.ga/api/HW_CODES")
+      let {data} = await axios.get("https://api.sharecode.ga/api/HW_CODES", {timeout: 3000})
       shareCodes = [
         ...shareCodes,
         ...data.jxcfd
@@ -184,9 +267,9 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
       console.log('获取HelloWorld助力码出错')
     }
   }
-  if (CFD_HELP_POOL === 'true') {
+  if (HELP_POOL === 'true') {
     try {
-      let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20')
+      let {data} = await axios.get('https://api.sharecode.ga/api/jxcfd/20', {timeout: 3000})
       console.log('获取到20个随机助力码:', data.data)
       shareCodes = [...shareCodes, ...data.data]
     } catch (e) {
@@ -198,7 +281,7 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
   for (let i = 0; i < cookiesArr.length; i++) {
     for (let j = 0; j < shareCodes.length; j++) {
       cookie = cookiesArr[i]
-      console.log('去助力:', shareCodes[j])
+      console.log(`账号${i + 1}去助力:`, shareCodes[j])
       res = await api('story/helpbystage', '_cfd_t,bizCode,dwEnv,ptag,source,strShareId,strZone', {strShareId: shareCodes[j]})
       console.log('助力:', res)
       if (res.iRet === 2232 || res.sErrMsg === '今日助力次数达到上限，明天再来帮忙吧~') {
@@ -208,30 +291,6 @@ let UserName: string, index: number, isLogin: boolean, nickName: string
     }
   }
 })()
-
-interface Params {
-  strBuildIndex?: string,
-  ddwCostCoin?: number,
-  taskId?: number,
-  dwType?: string,
-  configExtra?: string,
-  strStoryId?: string,
-  triggerType?: number,
-  ddwTriggerDay?: number,
-  ddwConsumeCoin?: number,
-  dwIsFree?: number,
-  ddwTaskId?: string,
-  strShareId?: string,
-  strMarkList?: string,
-  dwSceneId?: string,
-  strTypeCnt?: string,
-  dwUserId?: number,
-  ddwCoin?: number,
-  ddwMoney?: number,
-  dwPrizeLv?: number,
-  dwPrizeType?: number,
-  strPrizePool?: string
-}
 
 function api(fn: string, stk: string, params: Params = {}) {
   return new Promise(async resolve => {
@@ -293,7 +352,7 @@ function makeShareCodes() {
     shareCodes.push(res.strMyShareId)
     let pin: string = cookie.match(/pt_pin=([^;]*)/)![1]
     pin = Md5.hashStr(pin)
-    axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`)
+    axios.get(`https://api.sharecode.ga/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 3000})
       .then(res => {
         if (res.data.code === 200)
           console.log('已自动提交助力码')
@@ -301,7 +360,8 @@ function makeShareCodes() {
           console.log('提交失败！已提交farm和bean的cookie才可提交cfd')
         resolve()
       })
-      .catch(e => {
+      .catch((e) => {
+        console.log(e)
         reject('访问助力池出错')
       })
   })
@@ -403,4 +463,8 @@ function wait(t: number) {
       resolve()
     }, t)
   })
+}
+
+function getRandomNumberByRange(start: number, end: number): number {
+  return Math.floor(Math.random() * (end - start) + start)
 }
