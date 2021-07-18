@@ -114,6 +114,6 @@
 # 京喜牧场
 25 0-23/3 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 # 电竞经理
-15 0-23/2 * * * node /scripts/jd_EsportsManager.js >> /scripts/logs/jd_EsportsManager.log 2>&1
+15 0-23/2 * * * node /scripts/jd_esportsManager.js >> /scripts/logs/jd_esportsManager.log 2>&1
 # 京喜财富岛
-8 8-22/1 * * * cd /scripts/ && npx ts-node /scripts/jd_cfd.ts >> /scripts/logs/jd_cfd.log 2>&1
+8 8-23/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
