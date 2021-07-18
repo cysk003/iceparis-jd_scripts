@@ -116,4 +116,4 @@
 # 电竞经理
 15 0-23/2 * * * node /scripts/jd_esportsManager.js >> /scripts/logs/jd_esportsManager.log 2>&1
 # 京喜财富岛
-8 8-23/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
+8 0-23/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
