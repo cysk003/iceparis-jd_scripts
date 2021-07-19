@@ -113,7 +113,7 @@
 5 0 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
 # 京喜牧场
 25 0-23/3 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
-# 电竞经理
-15 0-23/2 * * * node /scripts/jd_esportsManager.js >> /scripts/logs/jd_esportsManager.log 2>&1
 # 京喜财富岛
-8 0-23/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
+8 0-22/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
+# 京喜财富岛提现
+0 0 * * * node /scripts/jd_cfdtx.js >> /scripts/logs/jd_cfdtx.log 2>&1
