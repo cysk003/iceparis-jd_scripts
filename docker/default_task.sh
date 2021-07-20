@@ -161,7 +161,7 @@ echo "第3步判断是否配置了随机延迟参数..."
 if [ $RANDOM_DELAY_MAX ]; then
   if [ $RANDOM_DELAY_MAX -ge 1 ]; then
     echo "已设置随机延迟为 $RANDOM_DELAY_MAX , 设置延迟任务中..."
-    sed -i "/\(jd_bean_sign.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_cfd.ts\|jd_joy_feedPets.js\|jd_car_exchange.js\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
+    sed -i "/\(jd_bean_sign.js\|jd_blueCoin.js\|jd_joy_reward.js\|jd_joy_steal.js\|jd_joy_feedPets.js\|jd_car_exchange.js\)/!s/node/sleep \$((RANDOM % \$RANDOM_DELAY_MAX)); node/g" $mergedListFile
   fi
 else
   echo "未配置随机延迟对应的环境变量，故不设置延迟任务..."
@@ -223,7 +223,6 @@ if [ -n "$ENABLE_AUTO_HELP" ]; then
     echo "开启自动助力"
     #在所有脚本执行前，先执行助力码导出
     sed -i 's/node/ . \/scripts\/docker\/auto_help.sh export > \/scripts\/logs\/auto_help_export.log \&\& node /g' ${mergedListFile}
-    sed -i 's/\snpx/ . \/scripts\/docker\/auto_help.sh export > \/scripts\/logs\/auto_help_export.log \&\& npx /g' ${mergedListFile}
   else
     echo "未开启自动助力"
   fi
