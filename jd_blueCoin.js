@@ -25,7 +25,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 let allMessage = '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let coinToBeans = $.getdata('coinToBeans') || "超值京豆包"; //兑换多少数量的京豆（20或者1000），0表示不兑换，默认不兑换京豆，如需兑换把0改成20或者1000，或者'商品名称'(商品名称放到单引号内)即可
+let coinToBeans = $.getdata('coinToBeans') || 0; //兑换多少数量的京豆（20或者1000），0表示不兑换，默认不兑换京豆，如需兑换把0改成20或者1000，或者'商品名称'(商品名称放到单引号内)即可
 let jdNotify = false;//是否开启静默运行，默认false关闭(即:奖品兑换成功后会发出通知提示)
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
@@ -112,12 +112,12 @@ Date.prototype.Format = function (fmt) { //author: meizz
   .finally(() => $.done())
 
 async function PrizeIndex() {
-  let timel = new Date().Format("ss")
-  let timea = 58;
-  if(timel < 58) {
-    let timec = (timea - timel) * 1000;
-    console.log(`等待时间 ${timec / 1000}`);
-    await sleep(timec)
+  let nowtime = new Date().Format("s.S")
+  let starttime = process.env.SM_STARTTIME ? process.env.SM_STARTTIME : 59;
+  if(nowtime < 59) {
+    let sleeptime = (starttime - nowtime) * 1000;
+    console.log(`等待时间 ${sleeptime / 1000}`);
+    await sleep(sleeptime)
   }
   await smtg_queryPrize();
   // await smtg_materialPrizeIndex();//兑换酒类奖品，此兑换API与之前的兑换京豆类的不一致，故目前无法进行
