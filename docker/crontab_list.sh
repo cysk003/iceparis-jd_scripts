@@ -100,7 +100,7 @@
 # 监控crazyJoy分红
 10 12 * * * node /scripts/jd_crazy_joy_bonus.js >> /scripts/logs/jd_crazy_joy_bonus.log 2>&1
 # 京东直播（又回来了）
-30-50/5 12,23 * * * node /scripts/jd_live.js >> /scripts/logs/jd_live.log 2>&1
+20-30/5 12 * * * node /scripts/jd_live.js >> /scripts/logs/jd_live.log 2>&1
 # 京东健康社区
 13 1,6,22 * * * node /scripts/jd_health.js >> /scripts/logs/jd_health.log 2>&1
 #京东健康社区收集健康能量
