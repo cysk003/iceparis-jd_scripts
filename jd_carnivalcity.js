@@ -1,3 +1,6 @@
+/**
+ * cron: 0 0-18/6 * * *
+ */
 const $ = new Env('京东手机狂欢城');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const md5 = require('md5');
@@ -517,6 +520,7 @@ async function doHelp() {
   console.log(`\n开始助力好友`);
   for (let i in $.newShareCodes) {
     let item = $.newShareCodes[i]
+    console.log('好友助力码：', item)
     if (!item) continue;
     const helpRes = await toHelp(item.trim());
     if (helpRes.data.status === 5) {
@@ -671,7 +675,7 @@ function getHelp() {
             $.temp.push(data.data.shareId);
           } else {
             console.log(`获取邀请码失败：${JSON.stringify(data)}`);
-            if (data.code === 1002) $.blockAccount = true;
+            if (data.code === 1002 || data.code === 1001) $.blockAccount = true;
           }
         }
       } catch (e) {
