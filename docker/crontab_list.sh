@@ -5,7 +5,7 @@
 
 ##############短期活动##############
 # 手机狂欢城 活动时间：2021-8-9到2021-8-28
-1 12,18 9-28 8 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+0 6,18 9-28 8 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 金机奖投票 活动时间：2021-8-9到2021-8-20
 13 0,7 8-20 8 * node /scripts/jd_golden_machine.js >> /scripts/logs/jd_golden_machine.log 2>&1
 # 女装盲盒 活动时间：2021-08-01到2021-08-31
