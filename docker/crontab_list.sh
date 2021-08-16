@@ -5,7 +5,7 @@
 
 ##############短期活动##############
 # 手机狂欢城 活动时间：2021-8-9到2021-8-28
-1 6,12,18 9-28 8 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+1 6,18 9-28 8 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 金机奖投票 活动时间：2021-8-9到2021-8-20
 13 0,7 8-20 8 * node /scripts/jd_golden_machine.js >> /scripts/logs/jd_golden_machine.log 2>&1
 # 女装盲盒 活动时间：2021-08-01到2021-08-31
@@ -15,7 +15,7 @@
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
 0 1,22 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 # 5G超级盲盒(活动时间：2021-8-2到2021-10-29)
-5 12-21/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
+2 12-21/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 # 天天加速
 38 12 * * * node /scripts/jd_speed.js >> /scripts/logs/jd_speed.log 2>&1
 # 省钱大赢家之翻翻乐(活动时间：2021-07-15至2021-8-15)
