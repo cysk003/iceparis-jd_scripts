@@ -41,7 +41,7 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/';
 !(async () => {
   $.newShareCodes = []
-  $.authorCode = await getAuthorShareCode('https://ghproxy.com/https://raw.githubusercontent.com/iceparis/dd_scripts/main/shareCodes/jd_updateBeanHome.json')
+  $.authorCode = await getAuthorShareCode('https://raw.githubusercontent.com/iceparis/dd_scripts/main/shareCodes/jd_updateBeanHome.json')
   if (!$.authorCode) {
     $.http.get({url: 'https://purge.jsdelivr.net/gh/iceparis/dd_scripts@main/shareCodes/jd_updateBeanHome.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
