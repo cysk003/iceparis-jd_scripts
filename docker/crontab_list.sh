@@ -18,6 +18,8 @@
 38 12 * * * node /scripts/jd_speed.js >> /scripts/logs/jd_speed.log 2>&1
 # 省钱大赢家之翻翻乐(活动时间：2021-07-15至2021-8-15)
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
+# 众筹许愿池
+18 13 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 
 ##############长期活动##############
 # 签到
@@ -71,7 +73,7 @@
 # 京东汽车(签到满500赛点可兑换500京豆)
 0 0 * * * node /scripts/jd_car.js >> /scripts/logs/jd_car.log 2>&1
 # 领京豆额外奖励(每日可获得3京豆)
-25 1,12,18 * * * node /scripts/jd_bean_home.js >> /scripts/logs/jd_bean_home.log 2>&1
+25 0,12,18 * * * node /scripts/jd_bean_home.js >> /scripts/logs/jd_bean_home.log 2>&1
 # 微信小程序京东赚赚
 6 0,11 * * * node /scripts/jd_jdzz.js >> /scripts/logs/jd_jdzz.log 2>&1
 # crazyJoy自动每日任务
@@ -93,17 +95,15 @@
 # 京东极速版签到+赚现金任务
 21 1,6 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
 # 京东直播（又回来了）
-20-30/5 12 * * * node /scripts/jd_live.js >> /scripts/logs/jd_live.log 2>&1
+# 20-30/5 12 * * * node /scripts/jd_live.js >> /scripts/logs/jd_live.log 2>&1
 # 京东健康社区
 13 1,6,22 * * * node /scripts/jd_health.js >> /scripts/logs/jd_health.log 2>&1
-#京东健康社区收集健康能量
+# 京东健康社区收集健康能量
 5-45/20 6-12/1 * * * node /scripts/jd_health_collect.js >> /scripts/logs/jd_health_collect.log 2>&1
 # 幸运大转盘
 10 10,23 * * * node /scripts/jd_market_lottery.js >> /scripts/logs/jd_market_lottery.log 2>&1
 # 领金贴
 5 0 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
-# 跳跳乐瓜分京豆
-15 0,12,22 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 京喜牧场
 25 7-23/2 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 # 京喜财富岛
