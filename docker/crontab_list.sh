@@ -5,7 +5,7 @@
 
 ##############短期活动##############
 # 手机狂欢城 活动时间：2021-8-9到2021-8-28
-1 6,18 9-28 8 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+0 6,18 9-28 8 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 女装盲盒 活动时间：2021-08-01到2021-08-31
 12 0 * 8 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
