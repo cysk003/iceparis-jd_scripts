@@ -19,7 +19,7 @@
 # 省钱大赢家之翻翻乐(活动时间：2021-07-15至2021-8-15)
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 # 众筹许愿池
-18 13 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
+18 0 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 
 ##############长期活动##############
 # 签到
