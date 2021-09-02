@@ -11,13 +11,13 @@
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
 0 1,22 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 # 5G超级盲盒(活动时间：2021-8-2到2021-10-29)
-0 12-21/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
+0 6-21/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 # 天天加速
 38 12 * * * node /scripts/jd_speed.js >> /scripts/logs/jd_speed.log 2>&1
 # 省钱大赢家之翻翻乐(活动时间：2021-07-15至2021-8-15)
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 # 众筹许愿池
-18 0 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
+5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 
 ##############长期活动##############
 # 签到
