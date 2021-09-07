@@ -104,7 +104,7 @@ if ($.isNode()) {
         $.canHelp = true;//能否参团
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
 
-        if ((cookiesArr && cookiesArr.length >= ($.tuanNum || 5)) && $.canHelp) {
+        if ((cookiesArr && cookiesArr.length >= ($.tuanNum || 10)) && $.canHelp) {
           console.log(`\n账号${$.UserName} 内部相互进团\n`);
           for (let item of $.tuanIds) {
             console.log(`\n${$.UserName} 去参加团 ${item}`);
