@@ -137,6 +137,24 @@ function getTaskDetail(taskId = '') {
               if (data?.data?.result?.taskVos) {
                 console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data?.data?.result?.taskVos[0].assistTaskDetailVo.taskToken}\n`);
                 // console.log('好友助力码：' + data?.data?.result?.taskVos[0].assistTaskDetailVo.taskToken)
+
+                // ***************************
+                // 报告运行次数
+                if(data?.data?.result?.taskVos[0].assistTaskDetailVo.taskToken){
+                  $.get({
+                  url: `https://api.sharecode.ga/api/runTimes?activityId=health&sharecode=${data?.data?.result?.taskVos[0].assistTaskDetailVo.taskToken}`
+                  }, (err, resp, data) => {
+                    if (err) {
+                      console.log('上报失败', err)
+                    } else {
+                      if (data === '1' || data === '0') {
+                        console.log('上报成功')
+                      }
+                    }
+                  })
+                }
+                // ***************************
+              
               }
             } else if (taskId === 22) {
               console.log(`${data?.data?.result?.taskVos[0]?.taskName}任务，完成次数：${data?.data?.result?.taskVos[0]?.times}/${data?.data?.result?.taskVos[0]?.maxTimes}`)
