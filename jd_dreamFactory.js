@@ -42,12 +42,7 @@ const randomCount = $.isNode() ? 5 : 5;
 let tuanActiveId = ``, hasSend = false;
 const jxOpenUrl = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%20%22des%22:%20%22m%22,%20%22url%22:%20%22https://wqsd.jd.com/pingou/dream_factory/index.html%22%20%7D`;
 let cookiesArr = [], cookie = '', message = '', allMessage = '';
-const inviteCodes = [
-  't3xqVvlTxLzkRu0GCXqiXb3ZK-r8jZCwlvQRdIToDT4=@574kPtg1stf6TiNwsprd6Q==@c13PlpfozoAAq0SFeVMObg==',
-  't3xqVvlTxLzkRu0GCXqiXb3ZK-r8jZCwlvQRdIToDT4=@574kPtg1stf6TiNwsprd6Q==@c13PlpfozoAAq0SFeVMObg==',
-  't3xqVvlTxLzkRu0GCXqiXb3ZK-r8jZCwlvQRdIToDT4=@574kPtg1stf6TiNwsprd6Q==@c13PlpfozoAAq0SFeVMObg==',
-  't3xqVvlTxLzkRu0GCXqiXb3ZK-r8jZCwlvQRdIToDT4=@574kPtg1stf6TiNwsprd6Q==@c13PlpfozoAAq0SFeVMObg==',
-];
+const inviteCodes = [''];
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.tuanIds = [];
 $.appId = 10001;
