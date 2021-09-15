@@ -22,6 +22,8 @@
 5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
 18 2,6 * 9 * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
+# 母婴-跳跳乐
+1 1,11,21 13-19 9 * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 ##############长期活动##############
 # 签到
 1 0 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
