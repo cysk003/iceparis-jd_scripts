@@ -27,7 +27,7 @@
 # 手机狂欢城 活动时间：2021-9-16到2021-10-1
 0 12,18 16-30 9 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 东东玩家 活动时间：2021-9-17到2021-10-11
-20 18 * * * node /scripts/jd_ddwj.js >> /scripts/logs/jd_ddwj.log 2>&1
+20 22 * * * node /scripts/jd_ddwj.js >> /scripts/logs/jd_ddwj.log 2>&1
 ##############长期活动##############
 # 签到
 1 0 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
