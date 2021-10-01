@@ -4,8 +4,8 @@
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
-# 女装盲盒 活动时间：2021-08-01到2021-08-31
-12 0 * 8 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
+# 女装盲盒 活动时间：2021-10-01到2021-10-31
+5 0 * 10 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
@@ -22,10 +22,6 @@
 5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
 18 2,6 * 9 * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
-# 母婴-跳跳乐
-1 1,11,21 13-19 9 * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
-# 手机狂欢城 活动时间：2021-9-16到2021-10-1
-0 18 16-30 9 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 京东小魔方
 10 2,8 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
 ##############长期活动##############
