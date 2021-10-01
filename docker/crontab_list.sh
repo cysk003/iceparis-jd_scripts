@@ -11,7 +11,7 @@
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
 0 1,22 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 # 5G超级盲盒(活动时间：2021-8-2到2021-10-29)
-0 6-21/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
+0 18 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 # 天天加速
 # 38 12 * * * node /scripts/jd_speed.js >> /scripts/logs/jd_speed.log 2>&1
 # 酷跑零食街
