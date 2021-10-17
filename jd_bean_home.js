@@ -41,11 +41,11 @@ if ($.isNode()) {
 const JD_API_HOST = 'https://api.m.jd.com/';
 !(async () => {
   $.newShareCodes = []
-  // $.authorCode = await getAuthorShareCode('https://raw.githubusercontent.com/iceparis/dd_scripts/main/shareCodes/jd_updateBeanHome.json')
+  // $.authorCode = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_updateBeanHome.json')
   // if (!$.authorCode) {
-  //   $.http.get({url: 'https://purge.jsdelivr.net/gh/iceparis/dd_scripts@main/shareCodes/jd_updateBeanHome.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+  //   $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateBeanHome.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
   //   await $.wait(1000)
-  //   $.authorCode = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/iceparis/dd_scripts@main/shareCodes/jd_updateBeanHome.json') || []
+  //   $.authorCode = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateBeanHome.json') || []
   // }
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -209,16 +209,18 @@ async function beanTaskList(type) {
             switch (type) {
               case 1:
                 console.log(`当前等级:${data.data.curLevel} 下一级可领取:${data.data.nextLevelBeanNum || 0}京豆`)
-                if (!data.data.viewAppHome.takenTask) {
-                  console.log(`去做[${data.data.viewAppHome.mainTitle}]`)
-                  await beanHomeIconDoTask({"flag":"0","viewChannel":"myjd"})
-                }
-                await $.wait(2000)
-                if (!data.data.viewAppHome.doneTask) {
-                  console.log(`去领奖[${data.data.viewAppHome.mainTitle}]`)
-                  await beanHomeIconDoTask({"flag":"1","viewChannel":"AppHome"})
-                } else {
-                  console.log(`[${data.data.viewAppHome.mainTitle}]已做完`)
+                if (data.data.viewAppHome) {
+                  if (!data.data.viewAppHome.takenTask) {
+                    console.log(`去做[${data.data.viewAppHome.mainTitle}]`)
+                    await beanHomeIconDoTask({"flag":"0","viewChannel":"myjd"})
+                  }
+                  await $.wait(2000)
+                  if (!data.data.viewAppHome.doneTask) {
+                    console.log(`去领奖[${data.data.viewAppHome.mainTitle}]`)
+                    await beanHomeIconDoTask({"flag":"1","viewChannel":"AppHome"})
+                  } else {
+                    console.log(`[${data.data.viewAppHome.mainTitle}]已做完`)
+                  }
                 }
                 break
               case 2:
@@ -235,7 +237,7 @@ async function beanTaskList(type) {
                         await $.wait(2000)
                         await beanDoTask({"actionType": 1, "taskToken": `${taskList.taskToken}`}, vo.taskType)
                         if (vo.taskType === 9 || vo.taskType === 8) {
-                          await $.wait(3000)
+                          await $.wait(vo.waitDuration * 1000 || 5000)
                           await beanDoTask({"actionType": 0, "taskToken": `${taskList.taskToken}`}, vo.taskType)
                         }
                       }
