@@ -100,5 +100,3 @@
 15 0-23/2 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 # 京喜财富岛
 1 0-22/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
-# 京喜财富岛热气球
-40 * * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1
