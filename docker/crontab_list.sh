@@ -2,7 +2,8 @@
 50 23 */3 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
 # 收集助力码
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
-
+# 手机狂欢城 活动时间：2021-9-16到2021-10-1
+0 18 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 ##############短期活动##############
 # 女装盲盒 活动时间：2021-10-01到2021-10-31
 5 0 * 10 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
