@@ -27,6 +27,8 @@
 0 0,5,22 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
 # 预售福利机（(活动时间：2021-10-20到2021-11-11)
 5 11 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
+# 省钱大赢家翻翻乐
+20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 
 ##############长期活动##############
 # 签到
