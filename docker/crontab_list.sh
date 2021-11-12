@@ -2,8 +2,7 @@
 50 23 */3 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
 # 收集助力码
 30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
-# 手机狂欢城 活动时间：2021-9-16到2021-10-1
-0 18 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+
 ##############短期活动##############
 # 女装盲盒 活动时间：2021-10-01到2021-10-31
 5 0 * 10 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
@@ -23,8 +22,6 @@
 18 2,22 * 10-12 * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 京东小魔方
 10 2,8 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
-# 预售福利机（(活动时间：2021-10-20到2021-11-11)
-5 11 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # 省钱大赢家翻翻乐
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 
@@ -38,7 +35,7 @@
 # 摇京豆
 6 0,23 * * * node /scripts/jd_club_lottery.js >> /scripts/logs/jd_club_lottery.log 2>&1
 # 东东农场
-15 7-19/4 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
+15 7,11,19,22 * * * node /scripts/jd_fruit.js >> /scripts/logs/jd_fruit.log 2>&1
 # 宠汪汪
 10 0-23/2 * * * node /scripts/jd_joy.js >> /scripts/logs/jd_joy.log 2>&1
 # 宠汪汪积分兑换京豆
