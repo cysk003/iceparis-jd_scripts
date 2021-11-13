@@ -39,7 +39,7 @@
 # 宠汪汪喂食
 18 0-23/1 * * * node /scripts/jd_joy_feedPets.js >> /scripts/logs/jd_joy_feedPets.log 2>&1
 # 东东萌宠
-25 7-19/4 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
+25 7-19/6 * * * node /scripts/jd_pet.js >> /scripts/logs/jd_pet.log 2>&1
 # 京东种豆得豆
 5 7-22/1 * * * node /scripts/jd_plantBean.js >> /scripts/logs/jd_plantBean.log 2>&1
 # 进店领豆
