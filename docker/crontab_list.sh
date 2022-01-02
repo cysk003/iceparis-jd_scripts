@@ -5,7 +5,7 @@
 
 ##############短期活动##############
 # 女装盲盒 活动时间：2021-11-01到2021-11-30
-15 1 * 1 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
+15 7 * 1 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
@@ -23,7 +23,7 @@
 # 签到
 4 0 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
 # 图形验证签到
-45 7 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
+15 8 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
 # 东东超市兑换奖品
 59 23 * * * node /scripts/jd_blueCoin.js >> /scripts/logs/jd_blueCoin.log 2>&1
 # 摇京豆
