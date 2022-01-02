@@ -5,7 +5,7 @@
 
 ##############短期活动##############
 # 女装盲盒 活动时间：2021-11-01到2021-11-30
-15 8 * 12 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
+15 1 * 1 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
@@ -18,8 +18,6 @@
 18 2,22 * 10-12 * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 省钱大赢家翻翻乐
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
-# 京东小魔方
-10 2,8 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
 
 ##############长期活动##############
 # 签到
