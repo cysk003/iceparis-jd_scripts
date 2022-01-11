@@ -15,7 +15,7 @@
 # 众筹许愿池
 5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
-18 2,22 * 10-12 * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
+18 2,22 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 省钱大赢家翻翻乐
 20 * * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 
