@@ -107,17 +107,17 @@ async function jdPlantBean() {
 
       // ***************************
       // 报告运行次数
-      $.get({
-        url: `https://api.jdsharecode.xyz/api/runTimes?activityId=bean&sharecode=${$.myPlantUuid}`
-      }, (err, resp, data) => {
-        if (err) {
-          console.log('上报失败', err)
-        } else {
-          if (data === '1' || data === '0') {
-            console.log('上报成功')
-          }
-        }
-      })
+      //$.get({
+      //  url: `https://api.jdsharecode.xyz/api/runTimes?activityId=bean&sharecode=${$.myPlantUuid}`
+      //}, (err, resp, data) => {
+      //  if (err) {
+      //    console.log('上报失败', err)
+      //  } else {
+      //    if (data === '1' || data === '0') {
+      //      console.log('上报成功')
+      //    }
+      //  }
+      //})
       // ***************************
             
       roundList = $.plantBeanIndexResult.data.roundList;
