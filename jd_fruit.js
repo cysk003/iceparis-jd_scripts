@@ -29,7 +29,7 @@ let cookiesArr = [], cookie = '', notify, newShareCodes, allMessage = '';
 let shareCodes = [''], message = '', subTitle = '', option = {}, isFruitFinished = false;
 const retainWater = 100;//保留水滴大于多少g,默认100g;
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
-let jdFruitBeanCard = true;//农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
+let jdFruitBeanCard = false;//农场使用水滴换豆卡(如果出现限时活动时100g水换20豆,此时比浇水划算,推荐换豆),true表示换豆(不浇水),false表示不换豆(继续浇水),脚本默认是浇水
 let randomCount = $.isNode() ? 5 : 5;
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const newPrizeBody = {"version": 14, "channel": 1, "babelChannel": "120"};
@@ -95,7 +95,9 @@ async function jdFruit() {
     await initForFarm();
     if ($.farmInfo.farmUserPro) {
       console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${$.farmInfo.farmUserPro.shareCode}\n`);
-      await farmmd5()
+      if ($.index === 1) {
+        await farmmd5()
+      }
 
       for (let k = 0; k < 3; k++) {
         try {
@@ -256,7 +258,7 @@ async function doDailyTask() {
   await getAwardInviteFriend();
   await clockInIn();//打卡领水
   await executeWaterRains();//水滴雨
-  await getExtraAward();//领取额外水滴奖励
+  // await getExtraAward();//领取额外水滴奖励
   await getExtraAward2();//新的助力奖励
   await turntableFarm()//天天抽奖得好礼
 }
