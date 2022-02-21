@@ -7,11 +7,11 @@
 # 女装盲盒 活动时间：2021-2-01到2021-2-28
 15 8 * 2 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
-45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
+# 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
 # 金榜创造营 活动时间：2021-05-21至2021-12-31
 0 1,22 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 # 5G超级盲盒(活动时间：2021-11-1到2022-1-28)
-0 0,18 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
+# 0 0,18 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 # 众筹许愿池
 5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
