@@ -29,7 +29,7 @@ console.log('\n====================Hello World====================\n')
 const jdCookieNode = $.isNode() ? require("./jdCookie.js") : "";
 let cookiesArr = [], cookie = "", message;
 const inviteCodes = ['']
-const randomCount = $.isNode() ? 10 : 5;
+const randomCount = $.isNode() ? 20 : 5;
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item]);
@@ -198,7 +198,7 @@ function getTaskDetail(taskId = '') {
 function runTimes() {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes?activityId=health&sharecode=${$.code}`
+      url: `https://api.jdsharecode.xyz/api/runTimes0407?activityId=health&sharecode=${$.code}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)
