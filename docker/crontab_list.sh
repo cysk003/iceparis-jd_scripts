@@ -15,7 +15,7 @@
 # 内容鉴赏官
 18 2,22 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 手机狂欢城 活动时间：2021-4-23
-0 0 * 4 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+# 0 0 * 4 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 ##############长期活动##############
 # 签到
 4 0 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
@@ -62,4 +62,4 @@
 # 京喜牧场
 15 0-23/2 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 # 京喜财富岛
-1 0-22/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
+# 1 0-22/1 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
