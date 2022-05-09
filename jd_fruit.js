@@ -147,7 +147,7 @@ async function jdFruit() {
 function runTimes(thisShareCode) {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes0407?activityId=farm&sharecode=${thisShareCode}`
+      url: `https://api.jdsharecode.xyz/api/runTimes0509?activityId=farm&sharecode=${thisShareCode}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)
@@ -1031,14 +1031,14 @@ function shareCodesFormat() {
 
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://api.jdsharecode.xyz/api/farm/50`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: `https://api.jdsharecode.xyz/api/farm/12`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            console.log(`随机取个50码放到您固定的互助码后面(不影响已有固定互助)`)
+            console.log(`随机取个12码放到您固定的互助码后面(不影响已有固定互助)`)
             data = JSON.parse(data);
           }
         }

@@ -43,7 +43,7 @@ let currentRoundId = null;//本期活动id
 let lastRoundId = null;//上期id
 let roundList = [];
 let awardState = '';//上期活动的京豆是否收取
-let randomCount = $.isNode() ? 20 : 5;
+let randomCount = $.isNode() ? 10 : 5;
 !(async () => {
   await requireConfig();
   if (!cookiesArr[0]) {
@@ -133,7 +133,7 @@ async function jdPlantBean() {
 function runTimes() {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes0407?activityId=bean&sharecode=${$.myPlantUuid}`
+      url: `https://api.jdsharecode.xyz/api/runTimes0509?activityId=bean&sharecode=${$.myPlantUuid}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)

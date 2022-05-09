@@ -38,7 +38,7 @@ let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭
 
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let goodsUrl = '', taskInfoKey = [];
-let randomCount = $.isNode() ? 20 : 5;
+let randomCount = $.isNode() ? 10 : 5;
 !(async () => {
   await requireConfig();
   if ($.isNode()) {
@@ -157,7 +157,7 @@ async function jdPet() {
 function runTimes() {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes0407?activityId=pet&sharecode=${$.petInfo.shareCode}`
+      url: `https://api.jdsharecode.xyz/api/runTimes0509?activityId=pet&sharecode=${$.petInfo.shareCode}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)
