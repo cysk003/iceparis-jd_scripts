@@ -1,19 +1,13 @@
 # 每3天的23:50分清理一次日志(互助码不清理，proc_file.sh对该文件进行了去重)
 50 23 */3 * * find /scripts/logs -name '*.log' | grep -v 'sharecodeCollection' | xargs rm -rf
 # 收集助力码
-30 * * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
+30 0 * * * sh +x /scripts/docker/auto_help.sh collect >> /scripts/logs/auto_help_collect.log 2>&1
 
 ##############短期活动##############
-# 女装盲盒 活动时间：2021-2-01到2021-2-28
-15 8 * 4 * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 # 京东极速版红包(活动时间：2021-5-5至2021-5-31)
 45 0,23 * * * node /scripts/jd_speed_redpocke.js >> /scripts/logs/jd_speed_redpocke.log 2>&1
-# 金榜创造营 活动时间：2021-05-21至2021-12-31
-0 1,22 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 # 众筹许愿池
 5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
-# 内容鉴赏官
-# 18 2,22 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
 # 手机狂欢城 活动时间：2021-4-23
 # 0 0 * 4 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 ##############长期活动##############
