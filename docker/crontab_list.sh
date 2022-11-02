@@ -10,6 +10,8 @@
 5 10,20 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 手机狂欢城 活动时间：2021-4-23
 # 0 0 * 4 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
+# 魔方
+5 8 * * * node /scripts/jd_mf_new.js >> /scripts/logs/jd_mf_new.log 2>&1
 ##############长期活动##############
 # 签到
 4 0 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
