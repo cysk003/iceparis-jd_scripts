@@ -12,6 +12,8 @@
 # 0 0 * 4 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 魔方
 5 8 * * * node /scripts/jd_mf_new.js >> /scripts/logs/jd_mf_new.log 2>&1
+# 金榜创造营
+15 1,20 * * * node /scripts/jd_gold_creator.js >> /scripts/logs/jd_gold_creator.log 2>&1
 ##############长期活动##############
 # 签到
 4 0 * * * cd /scripts && node jd_bean_sign.js >> /scripts/logs/jd_bean_sign.log 2>&1
