@@ -147,7 +147,7 @@ async function jdFruit() {
 function runTimes(thisShareCode) {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://sharecodepool.cnmb.win/api/runTimes0917?activityId=farm&sharecode=${thisShareCode}`
+      url: `http://sharecodepool.cnmb.pw/api/runTimes0917?activityId=farm&sharecode=${thisShareCode}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)
@@ -1031,7 +1031,7 @@ function shareCodesFormat() {
 
 function readShareCode() {
   return new Promise(async resolve => {
-    $.get({url: `https://sharecodepool.cnmb.win/api/farm/12`, timeout: 10000}, (err, resp, data) => {
+    $.get({url: `http://sharecodepool.cnmb.pw/api/farm/10`, timeout: 10000}, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
